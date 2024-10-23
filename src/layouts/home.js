@@ -3,7 +3,7 @@ import { useState } from "react";
 import Pagination from "./pagination";
 import SliderComponent from "./sliderComponent";
 
-let api = "2da64fa643204522a38df55a18425e21";
+let api = process.env.REACT_APP_API_KEY;
 
 function HomePage() {
   let id = useLoaderData();
