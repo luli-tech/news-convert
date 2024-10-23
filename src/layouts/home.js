@@ -9,7 +9,7 @@ function HomePage() {
   let id = useLoaderData();
 
   let [currentPage, setCurrentPage] = useState(1);
-  let [itemsPerPage] = useState(10);
+  let [itemsPerPage] = useState(20);
 
   let totalPages = Math.ceil(id.length / itemsPerPage);
 
