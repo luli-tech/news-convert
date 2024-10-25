@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  flex: 0 0 auto;
 }
 body {
 }
@@ -10,6 +11,16 @@ Link {
   text-decoration: none;
 }
 .overlay {
+}
+.navbar {
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  font-family: sans-serif;
+  z-index: 1000;
 }
 .slider-container {
   width: 100%;
@@ -136,9 +147,29 @@ Link {
   position: fixed;
   right: 0;
   top: 0px;
+  transition: 0.5s;
   z-index: 100;
   width: 40%;
   background: lavender;
+}
+.close-side {
+  height: 100%;
+  position: fixed;
+  right: -100rem;
+  top: 0px;
+  transition: 0.5s;
+  z-index: 100;
+  width: 40%;
+  background: lavender;
+}
+.nav-icon {
+  font-size: 25px;
+  width: 40px;
+  height: 25px;
+  cursor: pointer;
+  background-color: red;
+  border: 1px solidred;
+  color: white;
 }
 .title {
   display: -webkit-box;
@@ -176,7 +207,7 @@ Link {
   align-items: center;
 }
 .icons .font {
-  color: blue;
+  color: red;
   font-size: 25px;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), 4px 4px 10px rgba(0, 2, 0, 0.2),
     6px 6px 15px rgba(0, 0, 0, 0.1);
@@ -212,10 +243,10 @@ Link {
   gap: 15px;
 }
 .active {
-  background: red;
+  background: blue;
   padding: 5px;
   height: 25px;
-  width: 25px;
+  width: 40px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
@@ -223,10 +254,10 @@ Link {
   font-weight: bold;
 }
 .notActive {
-  background: blue;
+  background: red;
   padding: 5px;
   height: 25px;
-  width: 25px;
+  width: 50px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
@@ -239,4 +270,62 @@ Link {
   margin-top: 20px;
   padding: 20px;
   justify-content: center;
+}
+.overlay {
+}
+.close-container {
+  background-color: ;
+  text-align: right;
+}
+.close-sidebar {
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 40px;
+  cursor: pointer;
+}
+.logins {
+  margin: auto;
+}
+.logins .sign-in-input {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  gap: 25px;
+}
+.logins .sign-in-btns {
+  padding: 5px 0;
+}
+.logins div label {
+  font-size: 18px;
+}
+.logins button {
+  background-color: red;
+  justify-self: center;
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 15px;
+  font-weight: bold;
+  border-radius: 25px;
+}
+.logins div input {
+  height: 50px;
+  outline: none;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  line-height: 40px;
+  overflow: hidden;
+}
+.login-page .login-container {
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 30px;
 }

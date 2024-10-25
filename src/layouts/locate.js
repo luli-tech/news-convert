@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 function Locate() {
   let load = useLoaderData();
-  console.log(load);
 
   return (
     <div className="news-content-container">

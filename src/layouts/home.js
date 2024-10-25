@@ -84,7 +84,7 @@ export let loadContent = async () => {
   let data = await res.json();
 
   let final = await Promise.all(
-    data.articles.map(async (article) => {
+    data?.articles?.map(async (article) => {
       let uniqueId = await generateHash(article.title);
       return {
         id: uniqueId,

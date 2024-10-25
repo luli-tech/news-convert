@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 function Sidebar({ visible }) {
   let active = ({ isActive }) => ({
     backgroundColor: isActive ? "red" : "",
@@ -9,7 +11,14 @@ function Sidebar({ visible }) {
   });
   return (
     <div className="overlay">
-      <div onClick={visible}>
+      <div>
+        <div className="close-container">
+          <FontAwesomeIcon
+            onClick={visible}
+            className="close-sidebar"
+            icon={faMultiply}
+          ></FontAwesomeIcon>
+        </div>
         <div style={{ height: "15rem" }}>
           <img src="logo192.png" />
           <p>AYOMIKUN OLABODE</p>
