@@ -27,6 +27,7 @@ function Login() {
             <button
               style={{
                 background: "white",
+                cursor: "Pointer",
                 border: "1px solid black",
                 color: "black",
               }}

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMultiply } from "@fortawesome/free-solid-svg-icons";
-function Sidebar({ visible }) {
+function Sidebar({ letOpen }) {
   let active = ({ isActive }) => ({
     backgroundColor: isActive ? "red" : "",
     textDecoration: "none",
@@ -14,7 +14,7 @@ function Sidebar({ visible }) {
       <div>
         <div className="close-container">
           <FontAwesomeIcon
-            onClick={visible}
+            onClick={letOpen}
             className="close-sidebar"
             icon={faMultiply}
           ></FontAwesomeIcon>

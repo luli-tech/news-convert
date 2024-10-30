@@ -1,5 +1,5 @@
 import { useLoaderData, Outlet, useParams } from "react-router-dom";
-import { loadContent } from "./home";
+// import { loadContent } from "./home";
 function Location() {
   return (
     <>
@@ -11,10 +11,10 @@ function Location() {
 
 export default Location;
 
-export let getParams = async ({ params }) => {
-  const { id } = params;
+// export let getParams = async ({ params }) => {
+//   const { id } = params;
 
-  let res = await loadContent();
+//   let res = await loadContent();
 
-  return res.find((data) => data.id == id);
-};
+//   return res.find((data) => data.id == id);
+// };

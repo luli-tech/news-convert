@@ -1,103 +1,78 @@
-import { useLoaderData, NavLink } from "react-router-dom";
-import { useState } from "react";
+// src/components/HomePage.js
+import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Pagination from "./pagination";
+import { fetchNews } from "../store";
 import SliderComponent from "./sliderComponent";
 
-let api = process.env.REACT_APP_API_KEY;
-
 function HomePage() {
-  let id = useLoaderData();
+  const dispatch = useDispatch();
 
-  let [currentPage, setCurrentPage] = useState(1);
-  let [itemsPerPage] = useState(20);
+  // Fetch articles data and status from Redux store
+  const newsData = useSelector((state) => state.news.articles);
+  const status = useSelector((state) => state.news.status);
 
-  let totalPages = Math.ceil(id.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
-  let startIndex = (currentPage - 1) * itemsPerPage;
-  let currentItems = id.slice(startIndex, startIndex + itemsPerPage);
+  // Dispatch fetchNews on component mount to load news data
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchNews());
+    }
+  }, [dispatch, status]);
 
-  let pages = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
+  // Pagination calculations
+  const totalPages = Math.ceil(newsData.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentItems = newsData.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  if (status === "loading") return <p>Loading...</p>;
+  if (status === "failed") return <p>Error loading news data.</p>;
+
   return (
     <>
       <h1>Home</h1>
-      <SliderComponent id={id} />
+      <SliderComponent data={newsData} />
       <div className="container">
-        {currentItems.map((data) => (
-          <NavLink
-            to={`/location/${data.id}`}
-            className="main-container"
-            key={data.id}
-          >
-            <div className="img-container">
-              <img src={data.image} alt={data.title} />
-            </div>
-            <div>
-              <p className="title">{data.title}</p>
-            </div>
-            <div className="content-name">
-              <div className="profile-container">
-                <img src={data.image} alt={data.author} />
+        {currentItems
+          .filter((data) => data.urlToImage)
+          .map((data) => (
+            <NavLink
+              to={`/location/${data.id}`}
+              className="main-container"
+              key={data.id}
+            >
+              <div className="img-container">
+                <img src={data.urlToImage} alt={data.title} />
               </div>
-              <div className="target-author">
-                <p>{data.author || "Unknown Author"}</p>
-                <p>{new Date(data.published).toLocaleDateString()}</p>
+              <div>
+                <p className="title">{data.title}</p>
               </div>
-            </div>
-          </NavLink>
-        ))}
+              <div className="content-name">
+                <div className="profile-container">
+                  <img src={data.urlToImage} alt={data.author} />
+                </div>
+                <div className="target-author">
+                  <p>{data.author || "Unknown Author"}</p>
+                  <p>{data.published}</p>
+                </div>
+              </div>
+            </NavLink>
+          ))}
       </div>
-      <>
-        <Pagination
-          handlePageChange={handlePageChange}
-          currentPage={currentPage}
-          pages={pages}
-        />
-      </>
+      <Pagination
+        handlePageChange={handlePageChange}
+        currentPage={currentPage}
+        pages={Array.from({ length: totalPages }, (_, i) => i + 1)}
+      />
     </>
   );
 }
 
 export default HomePage;
-
-async function generateHash(text) {
-  const msgUnit = new TextEncoder().encode(text);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", msgUnit);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-  return hashHex;
-}
-
-export let loadContent = async () => {
-  let res = await fetch(
-    `https://newsapi.org/v2/everything?q=mexico&apiKey=${api}`
-  );
-  let data = await res.json();
-
-  let final = await Promise.all(
-    data?.articles?.map(async (article) => {
-      let uniqueId = await generateHash(article.title);
-      return {
-        id: uniqueId,
-        title: article.title,
-        image: article.urlToImage,
-        content: article.content,
-        description: article.description,
-        published: new Date(article.publishedAt).toLocaleDateString(),
-        url: article.url,
-        author: article.author,
-      };
-    })
-  );
-
-  return final.filter((data) => data.image);
-};

@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import "./App.css";
-import Navabar from "./layouts/navabar"; // Fixed typo in the file name 'navbar'
+import Navbar from "./layouts/navbar"; // Fixed typo in the file name 'navbar'
 import Location from "./layouts/location";
 import HomePAge from "./layouts/home";
 import Error from "./layouts/error";
@@ -13,7 +13,7 @@ import Channels from "./layouts/channels";
 import Blog from "./layouts/blog";
 import Video from "./layouts/video";
 import { getParams } from "./layouts/location";
-import { loadContent } from "./layouts/home";
+// import { loadContent } from "./layouts/home";
 import Contact from "./layouts/contact";
 import Register from "./layouts/register";
 import Locate from "./layouts/locate";
@@ -23,9 +23,9 @@ import Faq from "./layouts/faq";
 function App() {
   let provider = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Navabar />}>
+      <Route path="/" element={<Navbar />}>
         {/* Home page with loader */}
-        <Route index element={<HomePAge />} loader={loadContent} />
+        <Route index element={<HomePAge />} />
 
         {/* Other static routes */}
         <Route path="video" element={<Video />} />
@@ -38,7 +38,7 @@ function App() {
 
         {/* Dynamic location routes */}
         <Route path="location" element={<Location />}>
-          <Route path=":id" element={<Locate />} loader={getParams} />
+          <Route path=":id" element={<Locate />} />
         </Route>
 
         {/* Fallback route for non-existing paths */}

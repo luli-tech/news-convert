@@ -1,28 +1,5 @@
 import { useState } from "react";
-function Pagination({
-  id,
-  currentPage,
-  totalPages,
-  setCurrentPage,
-  pages,
-  handlePageChange,
-}) {
-  //   let [currentPage, setCurrentPage] = useState(1);
-  //   let [itemsPerPage] = useState(10);
-
-  //   let totalPages = Math.ceil(id.length / itemsPerPage);
-
-  //   let startIndex = (currentPage - 1) * itemsPerPage;
-  //   let currentItems = id.slice(startIndex, startIndex + itemsPerPage);
-
-  //   let pages = [];
-  //   for (let i = 1; i <= totalPages; i++) {
-  //     pages.push(i);
-  //   }
-
-  //   const handlePageChange = (pageNumber) => {
-  //     setCurrentPage(pageNumber);
-  //   };
+function Pagination({ currentPage, pages, handlePageChange }) {
   console.log(currentPage);
   return (
     <>
