@@ -20,11 +20,17 @@ function Navbar() {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (searchQuery) {
-      dispatch(setSearch(searchQuery));
-      dispatch(fetchNews(searchQuery));
+  const handleSearchSubmit = (e, category) => {
+    if (e) e.preventDefault();
+
+    const searchValue = category || searchQuery;
+
+    if (searchValue) {
+      dispatch(setSearch(searchValue));
+      dispatch(fetchNews(searchValue));
+    }
+
+    if (!category) {
       setSearchQuery("");
     }
   };
@@ -48,7 +54,10 @@ function Navbar() {
           <FontAwesomeIcon icon={faBars} />
         </button>
         <div className={open ? "sidebar" : "close-side"}>
-          <Sidebar letOpen={letOpen} />
+          <Sidebar
+            letOpen={letOpen}
+            handleSearchSubmit={handleSearchSubmit} // Pass the submit function here
+          />
         </div>
       </nav>
       <Outlet className="outlet" />

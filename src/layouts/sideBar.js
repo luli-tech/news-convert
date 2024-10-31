@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMultiply } from "@fortawesome/free-solid-svg-icons";
-function Sidebar({ letOpen }) {
+
+function Sidebar({ letOpen, handleSearchSubmit }) {
+  function getcat(e) {
+    const category = e.target.textContent;
+    handleSearchSubmit(null, category); // Trigger search with the selected category
+  }
+
   let active = ({ isActive }) => ({
     backgroundColor: isActive ? "red" : "",
     textDecoration: "none",
@@ -31,9 +37,9 @@ function Sidebar({ letOpen }) {
           </div>
           <div>
             <p>Categories</p>
-            <ul className="categories">
-              <li>Education</li>
-              <li>Fashion</li>
+            <ul onClick={getcat} className="categories">
+              <li onClick={getcat}>Education</li>
+              <li onClick={getcat}>Fashion</li>
               <li>Lifestyle</li>
               <li>Gaming</li>
               <li>Entertainment</li>

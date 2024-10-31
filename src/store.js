@@ -3,6 +3,7 @@ import {
   createAsyncThunk,
   configureStore,
 } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const api = process.env.REACT_APP_API_KEY;
 const initialState = {
@@ -11,34 +12,42 @@ const initialState = {
   status: "idle",
   error: null,
 };
+
 export const fetchNews = createAsyncThunk(
   "articles/fetchArticles",
   async (query) => {
     const api = process.env.REACT_APP_API_KEY;
-    const res = await fetch(
-      `https://newsapi.org/v2/everything?q=${query}&apiKey=${api}`
-    );
-    const data = await res.json();
-    let finale = await Promise.all(
-      data?.articles?.map(async (article) => {
-        const uniqueId = await generateHash(article.title);
-        return {
-          id: uniqueId,
-          title: article.title,
-          image: article.urlToImage,
-          content: article.content,
-          description: article.description,
-          published: new Date(article.publishedAt).toLocaleDateString(),
-          url: article.url,
-          author: article.author,
-        };
-      })
-    );
-    let sortedArticles = finale.sort(
-      (a, b) => new Date(b.published) - new Date(a.published)
-    );
+    try {
+      // Use Axios to make the API call
+      const response = await axios.get(
+        `https://newsapi.org/v2/everything?q=${query}&apiKey=${api}`
+      );
 
-    return sortedArticles;
+      let finale = await Promise.all(
+        response.data.articles.map(async (article) => {
+          const uniqueId = await generateHash(article.title);
+          return {
+            id: uniqueId,
+            title: article.title,
+            image: article.urlToImage,
+            content: article.content,
+            description: article.description,
+            published: new Date(article.publishedAt).toLocaleDateString(),
+            url: article.url,
+            author: article.author,
+          };
+        })
+      );
+
+      let sortedArticles = finale.sort(
+        (a, b) => new Date(b.published) - new Date(a.published)
+      );
+
+      return sortedArticles;
+    } catch (error) {
+      // Handle any errors that occur during the request
+      throw Error(error.response?.data?.message || error.message);
+    }
   }
 );
 
