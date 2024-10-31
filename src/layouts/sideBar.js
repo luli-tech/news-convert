@@ -33,6 +33,7 @@ function Sidebar({ open, letOpen, handleSearchSubmit }) {
     gap: "20px",
     alignItems: "center",
     fontWeight: "bold",
+    padding: "5px 15px",
   });
   return (
     <div className={`${open ? "sidebar" : "close-side"} "bread"`}>
@@ -64,7 +65,7 @@ function Sidebar({ open, letOpen, handleSearchSubmit }) {
               fontWeight: "bold",
               alignItems: "center",
               gap: "20px",
-              padding: "10px 0px",
+              padding: "10px 15px",
             }}
           >
             <FontAwesomeIcon icon={faAngleDown} />
