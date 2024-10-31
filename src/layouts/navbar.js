@@ -39,7 +39,7 @@ function Navbar() {
     <Fragment>
       <nav className="navbar">
         <NavLink to="/" className="navbar-logo">
-          Logo
+          LuLi-News
         </NavLink>
         <form onSubmit={handleSearchSubmit}>
           <input
@@ -51,15 +51,16 @@ function Navbar() {
           />
         </form>
         <button onClick={letOpen} className="navbar-toggle">
-          <FontAwesomeIcon icon={faBars} />
+          <FontAwesomeIcon className="fabars" icon={faBars} />
         </button>
-        <div className={open ? "sidebar" : "close-side"}>
-          <Sidebar
-            letOpen={letOpen}
-            handleSearchSubmit={handleSearchSubmit} // Pass the submit function here
-          />
-        </div>
       </nav>
+      <div>
+        <Sidebar
+          open={open}
+          letOpen={letOpen}
+          handleSearchSubmit={handleSearchSubmit} // Pass the submit function here
+        />
+      </div>
       <Outlet className="outlet" />
       <Footer />
     </Fragment>

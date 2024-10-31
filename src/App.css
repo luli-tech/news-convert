@@ -23,6 +23,37 @@ Link {
   font-family: sans-serif;
   z-index: 1000;
 }
+.close-contain {
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  position: fixed;
+  right: 0;
+  top: 0;
+  font-size: 30px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.bread {
+  position: absolute;
+  background-color: pink;
+}
+.navbar .navbar-logo {
+  background: red;
+  text-decoration: none;
+  font-size: 12px;
+  width: fit-content;
+  font-style: italic;
+  background: red;
+  padding: 5px;
+  font-family: Helvetica;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  color: lavender;
+}
 .slider-container {
   width: 100%;
   height: 300px;
@@ -138,36 +169,42 @@ Link {
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  font-size: 20px;
+  font-size: 15px;
 }
-/* .nav-list LINK {
-  text-decoration: ;
-} */
+.cate-container ul {
+  height: 0;
+  overflow: hidden;
+}
+.close-sidebar {
+}
 .sidebar {
-  height: 100vh;
   position: fixed;
+  top: 0;
   right: 0;
-  overflow: scroll;
-  top: 0px;
-  transition: 0.5s;
-  z-index: 100;
-  padding: 30px 0px;
-  width: fit-content;
-  background: lavender;
+  width: 20%;
+  min-width: 250px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  font-size: 15px;
 }
 .sidebar::-webkit-scrollbar {
   display: none;
 }
+
 .close-side {
-  height: 100%;
-  position: fixed;
-  right: -100rem;
-  top: 0px;
-  transition: 0.5s;
-  z-index: 100;
-  width: 40%;
-  background: lavender;
+  position: fixed; /* Keep the sidebar fixed in the viewport */
+  top: 0; /* Align to the top */ /* Align to the left */
+  width: 1px; /* Set width as a percentage of the viewport */
+  /* Set a minimum width */
+  margin: auto;
+  height: 100vh; /* Full height of the viewport */
+  background-color: #f8f9fa; /* Background color */
+  overflow-y: auto; /* Add vertical scrolling if content overflows */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 .nav-icon {
   font-size: 25px;
@@ -250,21 +287,18 @@ Link {
   gap: 15px;
 }
 .active {
-  background: blue;
+  background: red;
   padding: 5px;
-  height: 25px;
-  width: 40px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 .notActive {
   background: red;
   padding: 5px;
   height: 25px;
-  width: 50px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
@@ -278,16 +312,7 @@ Link {
   padding: 20px;
   justify-content: center;
 }
-.close-sidebar {
-  padding: 10px;
-  color: black;
-  font-weight: bold;
-  position: fixed;
-  right: 0;
-  top: 0;
-  font-size: 40px;
-  cursor: pointer;
-}
+
 .logins {
   margin: auto;
 }
@@ -340,9 +365,39 @@ Link {
 .categories {
   color: black;
   list-style: none;
+  transition: 0.3s;
+  cursor: pointer;
 }
 .categories li {
   border-bottom: 1px solid black;
-  padding: 10px 0px;
+  padding: 20px 0px;
   cursor: pointer;
+}
+.navbar-search {
+  padding: 7px;
+  font-size: 15px;
+  outline: none;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+}
+.navbar-toggle {
+  font-size: 15px;
+  padding: 5px;
+  width: 30px;
+  height: 25px;
+  font-weight: bold;
+  color: white;
+  background: red;
+  border: none;
+  border-radius: 5px;
+}
+.categories ul {
+  transition: 0.3s;
+  overflow: hidden;
+  background-color: blue;
+  color: yellow;
+}
+.real-side {
+  background-color: blue;
 }
