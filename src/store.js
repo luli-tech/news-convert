@@ -1,66 +1,91 @@
-// src/store.js
 import {
   createSlice,
   createAsyncThunk,
   configureStore,
 } from "@reduxjs/toolkit";
 
-// Get the API key from environment variables
 const api = process.env.REACT_APP_API_KEY;
+const initialState = {
+  articles: [],
+  search: "",
+  status: "idle",
+  error: null,
+};
+export const fetchNews = createAsyncThunk(
+  "articles/fetchArticles",
+  async (query) => {
+    const api = process.env.REACT_APP_API_KEY;
+    const res = await fetch(
+      `https://newsapi.org/v2/everything?q=${query}&apiKey=${api}`
+    );
+    const data = await res.json();
+    let finale = await Promise.all(
+      data?.articles?.map(async (article) => {
+        const uniqueId = await generateHash(article.title);
+        return {
+          id: uniqueId,
+          title: article.title,
+          image: article.urlToImage,
+          content: article.content,
+          description: article.description,
+          published: new Date(article.publishedAt).toLocaleDateString(),
+          url: article.url,
+          author: article.author,
+        };
+      })
+    );
+    let sortedArticles = finale.sort(
+      (a, b) => new Date(b.published) - new Date(a.published)
+    );
 
-// Async thunk for fetching news data with a query
-export const fetchNews = createAsyncThunk("news/fetchNews", async (query) => {
-  const response = await fetch(
-    `https://newsapi.org/v2/everything?q=${query}&apiKey=${api}`
-  );
-  const data = await response.json();
-  return data.articles || []; // Return articles or an empty array
-});
+    return sortedArticles;
+  }
+);
 
-// Create a slice of the store for news
+function generateHash(text) {
+  const msgUnit = new TextEncoder().encode(text);
+  return crypto.subtle.digest("SHA-256", msgUnit).then((hashBuffer) => {
+    return Array.from(new Uint8Array(hashBuffer))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  });
+}
+
 const newsSlice = createSlice({
   name: "news",
-  initialState: {
-    articles: [], // Array to hold news articles
-    search: "", // Search query
-    status: "idle", // Status of the request (idle, loading, succeeded, failed)
-    error: null, // Error message
-  },
+  initialState,
   reducers: {
     setSearch(state, action) {
-      state.search = action.payload; // Update the search query in the state
+      state.search = action.payload;
     },
     clearSearch(state) {
-      state.search = ""; // Clear the search query
+      state.search = "";
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNews.pending, (state) => {
-        state.status = "loading"; // Set status to loading when fetching starts
+        state.status = "loading";
       })
       .addCase(fetchNews.fulfilled, (state, action) => {
-        state.status = "succeeded"; // Set status to succeeded when fetching is successful
-        state.articles = action.payload; // Update articles with fetched data
+        state.status = "succeeded";
+        state.articles = action.payload;
       })
       .addCase(fetchNews.rejected, (state, action) => {
-        state.status = "failed"; // Set status to failed when fetching fails
-        state.error = action.error.message; // Capture the error message
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
-// Action creators
 export const { setSearch, clearSearch } = newsSlice.actions;
 
-// Reducer
 export const newsReducer = newsSlice.reducer;
 
-// Configure the store
 const store = configureStore({
   reducer: {
-    news: newsReducer, // Register the news reducer
+    news: newsReducer,
   },
 });
 
-export default store; // Export the configured store
+export default store;

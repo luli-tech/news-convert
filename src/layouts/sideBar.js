@@ -31,6 +31,13 @@ function Sidebar({ letOpen }) {
           </div>
           <div>
             <p>Categories</p>
+            <ul className="categories">
+              <li>Education</li>
+              <li>Fashion</li>
+              <li>Lifestyle</li>
+              <li>Gaming</li>
+              <li>Entertainment</li>
+            </ul>
           </div>
           <div>
             <NavLink to="video" style={active}>

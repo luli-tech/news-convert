@@ -9,21 +9,18 @@ import SliderComponent from "./sliderComponent";
 function HomePage() {
   const dispatch = useDispatch();
 
-  // Fetch articles data and status from Redux store
   const newsData = useSelector((state) => state.news.articles);
   const status = useSelector((state) => state.news.status);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const itemsPerPage = 21;
 
-  // Dispatch fetchNews on component mount to load news data
   useEffect(() => {
     if (status === "idle") {
       dispatch(fetchNews());
     }
   }, [dispatch, status]);
 
-  // Pagination calculations
   const totalPages = Math.ceil(newsData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = newsData.slice(startIndex, startIndex + itemsPerPage);
@@ -32,16 +29,28 @@ function HomePage() {
     setCurrentPage(pageNumber);
   };
 
-  if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>Error loading news data.</p>;
+  if (status === "loading") {
+    return (
+      <div className="outlet">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+  if (status === "failed") {
+    return (
+      <div className="outlet">
+        <p>Error loading news data.</p>
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div className="outlet">
       <h1>Home</h1>
       <SliderComponent data={newsData} />
       <div className="container">
         {currentItems
-          .filter((data) => data.urlToImage)
+          .filter((data) => data.image)
           .map((data) => (
             <NavLink
               to={`/location/${data.id}`}
@@ -49,14 +58,14 @@ function HomePage() {
               key={data.id}
             >
               <div className="img-container">
-                <img src={data.urlToImage} alt={data.title} />
+                <img src={data.image} alt={data.title} />
               </div>
               <div>
                 <p className="title">{data.title}</p>
               </div>
               <div className="content-name">
                 <div className="profile-container">
-                  <img src={data.urlToImage} alt={data.author} />
+                  <img src={data.image} alt={data.author} />
                 </div>
                 <div className="target-author">
                   <p>{data.author || "Unknown Author"}</p>
@@ -71,7 +80,7 @@ function HomePage() {
         currentPage={currentPage}
         pages={Array.from({ length: totalPages }, (_, i) => i + 1)}
       />
-    </>
+    </div>
   );
 }
 

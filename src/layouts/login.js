@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons/faGoogle";
 function Login() {
   return (
-    <div className="login-page">
+    <div className="login-page outlet">
       <div className="login-container">
         <h1>Sign In</h1>
         <p>Stay updated on your professional world</p>

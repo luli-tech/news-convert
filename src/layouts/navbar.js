@@ -17,15 +17,15 @@ function Navbar() {
   }
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value); // Update the local state with the input value
+    setSearchQuery(e.target.value);
   };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault();
     if (searchQuery) {
-      dispatch(setSearch(searchQuery)); // Update Redux state with the search query
-      dispatch(fetchNews(searchQuery)); // Fetch news with the new query
-      setSearchQuery(""); // Clear the input field after submission
+      dispatch(setSearch(searchQuery));
+      dispatch(fetchNews(searchQuery));
+      setSearchQuery("");
     }
   };
 
@@ -36,14 +36,12 @@ function Navbar() {
           Logo
         </NavLink>
         <form onSubmit={handleSearchSubmit}>
-          {" "}
-          {/* Use handleSearchSubmit for form submission */}
           <input
             type="text"
             placeholder="search-news..."
             className="navbar-search"
             value={searchQuery}
-            onChange={handleSearchChange} // Call the function on input change
+            onChange={handleSearchChange}
           />
         </form>
         <button onClick={letOpen} className="navbar-toggle">
@@ -53,7 +51,7 @@ function Navbar() {
           <Sidebar letOpen={letOpen} />
         </div>
       </nav>
-      <Outlet />
+      <Outlet className="outlet" />
       <Footer />
     </Fragment>
   );
