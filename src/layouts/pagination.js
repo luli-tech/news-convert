@@ -1,6 +1,5 @@
 import { useState } from "react";
 function Pagination({ currentPage, pages, handlePageChange }) {
-  console.log(currentPage);
   return (
     <>
       <div className="pagination">

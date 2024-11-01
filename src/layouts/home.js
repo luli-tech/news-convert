@@ -20,10 +20,12 @@ function HomePage() {
       dispatch(fetchNews());
     }
   }, [dispatch, status]);
+  const sortedData = newsData;
+  // console.log("sortedArticles", newsData);
 
-  const totalPages = Math.ceil(newsData.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedData?.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = newsData.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = sortedData?.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -47,11 +49,11 @@ function HomePage() {
   return (
     <div className="outlet">
       <h1>Home</h1>
-      <SliderComponent data={newsData} />
+      <SliderComponent newsData={sortedData} />
       <div className="container">
         {currentItems
-          .filter((data) => data.image)
-          .map((data) => (
+          ?.filter((data) => data.image)
+          ?.map((data) => (
             <NavLink
               to={`/location/${data.id}`}
               className="main-container"
@@ -81,6 +83,7 @@ function HomePage() {
         pages={Array.from({ length: totalPages }, (_, i) => i + 1)}
       />
     </div>
+    // <h1>hello world</h1>
   );
 }
 

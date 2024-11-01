@@ -16,7 +16,6 @@ const initialState = {
 export const fetchNews = createAsyncThunk(
   "articles/fetchArticles",
   async (query) => {
-    const api = process.env.REACT_APP_API_KEY;
     try {
       // Use Axios to make the API call
       const response = await axios.get(
