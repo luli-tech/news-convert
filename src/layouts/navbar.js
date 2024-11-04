@@ -3,7 +3,6 @@ import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./footer";
-import Sidebar from "./sidebar";
 import { useDispatch } from "react-redux";
 import { fetchNews, setSearch } from "../store";
 

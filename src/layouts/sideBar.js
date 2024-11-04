@@ -111,7 +111,6 @@ function Sidebar({ open, toggleSidebar }) {
   );
 }
 
-// Styles for the profile section
 const profileStyle = {
   height: "15rem",
   display: "flex",

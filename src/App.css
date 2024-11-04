@@ -93,7 +93,7 @@ Link {
   font-size: 15px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
 }
 .img-container {
@@ -130,8 +130,6 @@ Link {
   display: flex;
   flex-direction: column;
   font-size: 17px;
-}
-.nav-list div {
 }
 .nav-list div * {
   color: white;
@@ -201,7 +199,7 @@ Link {
 .title {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
 }
 .title-container {
