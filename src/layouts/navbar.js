@@ -5,6 +5,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./footer";
 import { useDispatch } from "react-redux";
 import { fetchNews, setSearch } from "../store";
+import Sidebar from "./sideBar";
 
 function Navbar() {
   const dispatch = useDispatch();
