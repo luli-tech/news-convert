@@ -1,0 +1,56 @@
+.navbar {
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space out items */
+  padding: 10px;
+  background-color: #333; /* Background color */
+  color: white;
+}
+
+.navbar-logo {
+  font-size: 24px; /* Logo size */
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-search {
+  margin: 0 10px; /* Spacing for search input */
+}
+
+.navbar-toggle {
+  display: none; /* Hide toggle button on desktop */
+}
+
+/* Media Query for Desktop */
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: none; /* Hide toggle button */
+  }
+
+  .sidebar {
+    display: flex; /* Display sidebar as flex */
+    flex-direction: column; /* Stack sidebar items vertically */
+    width: 250px; /* Set width */
+    background-color: #444; /* Sidebar background */
+    height: 100vh; /* Full height */
+    position: absolute; /* Position it absolutely */
+    top: 0; /* Align to top */
+    left: 0; /* Align to left */
+    z-index: 1000; /* On top */
+  }
+
+  .sidebar.open {
+    display: block; /* Show sidebar when open */
+  }
+}
+
+/* Hide sidebar on mobile screens */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none; /* Hide sidebar */
+  }
+
+  .navbar-toggle {
+    display: block; /* Show toggle button on mobile */
+  }
+}

@@ -6,6 +6,8 @@
   flex: 0 0 auto;
 }
 body {
+  position: relative;
+  z-index: 20;
   min-height: 100vh;
 }
 body::-webkit-scrollbar {
@@ -14,94 +16,50 @@ body::-webkit-scrollbar {
 Link {
   text-decoration: none;
 }
-/* .overlay {
-} */
 .navbar {
   background: black;
   color: white;
   display: flex;
-  justify-content: space-around;
+  height: px;
   align-items: center;
   padding: 20px;
+  justify-content: space-evenly;
   font-family: sans-serif;
-  z-index: 1000;
 }
-.close-contain {
+/* .close-contain {
   padding: 10px;
-  color: black;
   font-weight: bold;
-  position: fixed;
+  position: relative;
   right: 0;
+  text-align: right;
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57),
+    11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
   top: 0;
   font-size: 30px;
-  transition: 0.3s;
   cursor: pointer;
-}
+} */
 .bread {
-  position: absolute;
-  background-color: pink;
+  height: fit-content;
 }
 .navbar .navbar-logo {
-  background: red;
   text-decoration: none;
   font-size: 12px;
   width: fit-content;
   font-style: italic;
-  background: red;
   padding: 5px;
   font-family: Helvetica;
   cursor: pointer;
   border: none;
-  border-radius: 10px;
+  border-radius: 10%;
   color: white;
   font-weight: bold;
   color: lavender;
 }
-.slider-container {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  background: red;
-}
-.slider-container .slider-componnet-children {
-  position: relative;
-  height: 300px;
-  width: 100%;
-}
-.slider-image {
-  height: 100%;
 
-  width: 100%;
-}
-.slider-image img {
-  height: 100%;
-}
-.slider-componnet-children .slider-component-inner-text {
-  position: absolute;
-  bottom: 30%;
-  width: 90%;
-  line-height: 30px;
-  transform: translate(5%, 25%);
-  background: rgba(57, 52, 52, 0.8);
-  padding: 15px;
-  border-radius: 5px;
-  left: 0;
-}
-.slider-componnet-children .slider-component-inner-text .slidertitle {
-  font-size: 25px;
-  font-weight: bold;
-  color: white;
-}
-.slider-componnet-children .slider-component-inner-text .sliderauthor {
-  color: white;
-  font-size: 15px;
-  padding: 10px;
-}
-.slider-componnet-children .slider-component-inner-text .sliderpublish {
-  color: white;
-  font-size: 15px;
-}
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -172,16 +130,39 @@ Link {
   display: flex;
   flex-direction: column;
   font-size: 17px;
+}
+.nav-list div {
+}
+.nav-list div * {
+  color: white;
+  display: flex;
   gap: 10px;
 }
 .cate-container ul {
   height: 0;
+  color: white;
   overflow: hidden;
+  display: flex;
+  background: white;
+  flex-direction: column;
 }
+
+/* .cate-container ul li * {
+  text-decoration: none;
+  background-color: #f8f9fa;
+} */
 .close-sidebar {
+  color: white;
+  margin-left: auto;
 }
-.sidebar {
-  position: fixed;
+.open {
+  right: 0;
+}
+.close {
+  right: -200px;
+}
+/* .sidebar {
+  position: absolute;
   top: 0;
   right: 0;
   width: 20%;
@@ -192,23 +173,22 @@ Link {
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   font-size: 15px;
-}
+} */
 .sidebar::-webkit-scrollbar {
   display: none;
 }
-
+/* 
 .close-side {
-  position: fixed; /* Keep the sidebar fixed in the viewport */
-  top: 0; /* Align to the top */ /* Align to the left */
-  width: 1px; /* Set width as a percentage of the viewport */
-  /* Set a minimum width */
-  margin: auto;
-  height: 100vh; /* Full height of the viewport */
-  background-color: #f8f9fa; /* Background color */
-  overflow-y: auto; /* Add vertical scrolling if content overflows */
+  position: absolute;
+  top: 0;
+
+  height: 100vh;
+  background-color: #f8f9fa;
+  overflow: hidden;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-}
+  left: -300px;
+} */
 .nav-icon {
   font-size: 25px;
   width: 40px;
@@ -291,10 +271,10 @@ Link {
 }
 .active {
   background: red;
-  padding: 10px 25px;
+  padding: 0px 10px;
   cursor: pointer;
   border: none;
-  color: black;
+  color: white;
   transition: 0.4s;
   font-weight: bold;
 }
@@ -318,6 +298,13 @@ Link {
 
 .logins {
   margin: auto;
+}
+.butter {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: fit-content;
+  background: black;
 }
 .logins .sign-in-input {
   display: flex;
@@ -355,7 +342,6 @@ Link {
   align-items: center;
   height: 70vh;
   line-height: 40px;
-  overflow: hidden;
 }
 .login-page .login-container {
   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
@@ -364,17 +350,6 @@ Link {
 }
 .outlet {
   min-height: 100vh;
-}
-.categories {
-  color: black;
-  list-style: none;
-  transition: 0.3s;
-  cursor: pointer;
-}
-.categories li {
-  border-bottom: 1px solid black;
-  padding: 20px 3rem;
-  cursor: pointer;
 }
 .navbar-search {
   padding: 7px;
@@ -395,12 +370,124 @@ Link {
   border: none;
   border-radius: 5px;
 }
-.categories ul {
-  transition: 0.3s;
-  overflow: hidden;
-  background-color: blue;
-  color: yellow;
-}
 .real-side {
   background-color: blue;
+}
+.profile {
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57),
+    11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
+}
+
+/* Custom styles */
+.navbar {
+  background-color: #333; /* Customize as needed */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.navbar-logo {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.navbar-search {
+  padding: 5px;
+}
+
+.navbar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #444;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.close-sidebar {
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-list {
+  padding: 20px;
+}
+
+.nav-list a {
+  color: white;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.categories {
+  display: none;
+}
+
+.categories.open {
+  display: block;
+}
+
+.categories {
+  display: none; /* Hide categories by default */
+}
+
+.categories.open {
+  display: block; /* Show categories when 'open' class is added */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  z-index: 999;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px; /* Adjust the width as needed */
+  height: 100%;
+  background-color: #343a40; /* Sidebar background color */
+  transition: transform 0.3s ease;
+  transform: translateX(-100%); /* Hidden by default */
+  z-index: 1000; /* Above other elements but below overlay */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Show sidebar */
+}
+
+.sidebar.closed {
+  transform: translateX(-100%); /* Hide sidebar */
 }

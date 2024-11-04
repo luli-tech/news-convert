@@ -1,4 +1,3 @@
-import { useState } from "react";
 function Pagination({ currentPage, pages, handlePageChange }) {
   return (
     <>

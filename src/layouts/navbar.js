@@ -3,34 +3,28 @@ import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./footer";
-import Sidebar from "./sideBar";
+import Sidebar from "./sidebar";
 import { useDispatch } from "react-redux";
 import { fetchNews, setSearch } from "../store";
 
 function Navbar() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  function letOpen() {
-    setOpen(!open);
-  }
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleSearchSubmit = (e, category) => {
-    if (e) e.preventDefault();
-
-    const searchValue = category || searchQuery;
-
-    if (searchValue) {
-      dispatch(setSearch(searchValue));
-      dispatch(fetchNews(searchValue));
-    }
-
-    if (!category) {
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery) {
+      dispatch(setSearch(searchQuery));
+      dispatch(fetchNews(searchQuery));
       setSearchQuery("");
     }
   };
@@ -44,25 +38,25 @@ function Navbar() {
         <form onSubmit={handleSearchSubmit}>
           <input
             type="text"
-            placeholder="search-news..."
+            placeholder="Search news..."
             className="navbar-search"
             value={searchQuery}
             onChange={handleSearchChange}
           />
         </form>
-        <button onClick={letOpen} className="navbar-toggle">
-          <FontAwesomeIcon className="fabars" icon={faBars} />
+        <button onClick={toggleSidebar} className="navbar-toggle">
+          <FontAwesomeIcon icon={faBars} />
         </button>
+        <Sidebar
+          open={sidebarOpen}
+          toggleSidebar={toggleSidebar}
+          handleSearchSubmit={handleSearchSubmit}
+        />
       </nav>
       <div>
-        <Sidebar
-          open={open}
-          letOpen={letOpen}
-          handleSearchSubmit={handleSearchSubmit} // Pass the submit function here
-        />
+        <Outlet />
+        <Footer />
       </div>
-      <Outlet className="outlet" />
-      <Footer />
     </Fragment>
   );
 }

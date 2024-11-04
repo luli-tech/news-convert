@@ -20,12 +20,10 @@ function HomePage() {
       dispatch(fetchNews());
     }
   }, [dispatch, status]);
-  const sortedData = newsData;
-  // console.log("sortedArticles", newsData);
 
-  const totalPages = Math.ceil(sortedData?.length / itemsPerPage);
+  const totalPages = Math.ceil(newsData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = sortedData?.slice(startIndex, startIndex + itemsPerPage);
+  const currentItems = newsData.slice(startIndex, startIndex + itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -33,14 +31,14 @@ function HomePage() {
 
   if (status === "loading") {
     return (
-      <div className="outlet">
+      <div>
         <p>Loading...</p>
       </div>
     );
   }
   if (status === "failed") {
     return (
-      <div className="outlet">
+      <div>
         <p>Error loading news data.</p>
       </div>
     );
@@ -49,11 +47,11 @@ function HomePage() {
   return (
     <div className="outlet">
       <h1>Home</h1>
-      <SliderComponent newsData={sortedData} />
+      <SliderComponent currentItems={currentItems} />
       <div className="container">
         {currentItems
-          ?.filter((data) => data.image)
-          ?.map((data) => (
+          .filter((data) => data.image)
+          .map((data) => (
             <NavLink
               to={`/location/${data.id}`}
               className="main-container"
@@ -83,7 +81,6 @@ function HomePage() {
         pages={Array.from({ length: totalPages }, (_, i) => i + 1)}
       />
     </div>
-    // <h1>hello world</h1>
   );
 }
 

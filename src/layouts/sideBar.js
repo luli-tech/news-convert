@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faMultiply,
   faHome,
   faVideo,
   faAngleDown,
@@ -13,124 +12,126 @@ import {
   faRegistered,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { height } from "@fortawesome/free-brands-svg-icons/faGoogle";
-function Sidebar({ open, letOpen, handleSearchSubmit }) {
-  let [openCategory, setOpenCategory] = useState(false);
-  function toggleCategory() {
-    setOpenCategory(!openCategory);
-  }
 
-  function getcat(e) {
-    const category = e.target.textContent;
-    handleSearchSubmit(null, category); // Trigger search with the selected category
-  }
+function Sidebar({ open, toggleSidebar }) {
+  const [openCategory, setOpenCategory] = useState(false);
 
-  let active = ({ isActive }) => ({
-    color: isActive ? "white" : "black",
+  const toggleCategory = () => {
+    setOpenCategory((prevState) => !prevState);
+  };
+
+  const activeStyle = ({ isActive }) => ({
+    color: isActive ? "white" : "white",
     textDecoration: "none",
     display: "flex",
-    height: "40px",
-    gap: "20px",
     alignItems: "center",
+    padding: "12px",
     fontWeight: "bold",
-    padding: "5px 15px",
   });
+
   return (
-    <div className={`${open ? "sidebar" : "close-side"} "bread"`}>
-      <div className="close-contain">
-        <FontAwesomeIcon
-          onClick={letOpen}
-          className="close-sidebar"
-          icon={faMultiply}
-        ></FontAwesomeIcon>
-      </div>
-      <div style={{ height: "15rem" }}>
-        <img src="logo192.png" />
-        <p>AYOMIKUN OLABODE</p>
-      </div>
-      <div className="nav-list">
-        <div>
-          <NavLink style={active} to="/">
+    <>
+      {open && <div className="overlay" onClick={toggleSidebar}></div>}
+      <div className={`sidebar ${open ? "open" : "closed"}`}>
+        <div className="profile" style={profileStyle}>
+          <img
+            className="img"
+            src="IMG_5966.JPG" // Ensure this path is correct and the image exists
+            alt="Profile"
+            style={imageStyle}
+          />
+          <p className="name" style={nameStyle}>
+            AYOMIKUN OLABODE
+          </p>
+        </div>
+        <div className="nav-list">
+          <NavLink style={activeStyle} to="/">
             <FontAwesomeIcon icon={faHome} /> Home
           </NavLink>
-        </div>
-        <div
-          onClick={toggleCategory}
-          className="cate-container"
-          style={{ cursor: "pointer" }}
-        >
-          <p
-            style={{
-              display: "flex",
-              fontWeight: "bold",
-              alignItems: "center",
-              gap: "20px",
-              padding: "10px 15px",
-            }}
+          <div
+            onClick={toggleCategory}
+            className="cate-container"
+            style={{ cursor: "pointer" }}
           >
-            <FontAwesomeIcon icon={faAngleDown} />
-            Categories
-          </p>
-          <ul
-            onClick={getcat}
-            className="categories"
-            style={{
-              height: openCategory ? "300px" : "",
-              transition: "0.3s",
-            }}
-          >
-            <li onClick={getcat}>Education</li>
-            <li onClick={getcat}>Fashion</li>
-            <li>Lifestyle</li>
-            <li>Gaming</li>
-            <li>Entertainment</li>
-          </ul>
-        </div>
-        <div>
-          <NavLink to="video" style={active}>
+            <p className="categories-title">
+              <FontAwesomeIcon icon={faAngleDown} /> Categories
+            </p>
+            <ul className={`categories ${openCategory ? "open" : ""}`}>
+              <li>
+                <NavLink to="/" style={activeStyle}>
+                  Education
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" style={activeStyle}>
+                  Fashion
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" style={activeStyle}>
+                  Lifestyle
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" style={activeStyle}>
+                  Gaming
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/" style={activeStyle}>
+                  Entertainment
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+          <NavLink to="video" style={activeStyle}>
             <FontAwesomeIcon icon={faVideo} /> Video Single
           </NavLink>
-        </div>
-        <div>
-          <NavLink to="channels" style={active}>
+          <NavLink to="channels" style={activeStyle}>
             <FontAwesomeIcon icon={faTelevision} /> Channels
           </NavLink>
-        </div>
-        <div>
-          <NavLink to="blog" style={active}>
-            <FontAwesomeIcon icon={faBlog} />
-            Blog
+          <NavLink to="blog" style={activeStyle}>
+            <FontAwesomeIcon icon={faBlog} /> Blog
           </NavLink>
-        </div>
-        <div>
-          <NavLink to="faq" style={active}>
-            <FontAwesomeIcon icon={faQuestion} /> Faq
+          <NavLink to="faq" style={activeStyle}>
+            <FontAwesomeIcon icon={faQuestion} /> FAQ
           </NavLink>
-        </div>
-        <div>
-          <NavLink to="*" style={active}>
-            <FontAwesomeIcon icon={faMultiply} /> 404 Page
-          </NavLink>
-        </div>
-        <div>
-          <NavLink to="contact" style={active}>
+          <NavLink to="contact" style={activeStyle}>
             <FontAwesomeIcon icon={faContactCard} /> Contact Us
           </NavLink>
-        </div>
-        <div>
-          <NavLink to="login" style={active}>
-            <FontAwesomeIcon icon={faSignIn} />
-            Login
+          <NavLink to="login" style={activeStyle}>
+            <FontAwesomeIcon icon={faSignIn} /> Login
           </NavLink>
-        </div>
-        <div>
-          <NavLink to="register" style={active}>
-            <FontAwesomeIcon icon={faRegistered} />
-            Register
+          <NavLink to="register" style={activeStyle}>
+            <FontAwesomeIcon icon={faRegistered} /> Register
           </NavLink>
         </div>
       </div>
-    </div>
+    </>
   );
 }
+
+// Styles for the profile section
+const profileStyle = {
+  height: "15rem",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  background:
+    "linear-gradient(112.1deg,rgb(32,38,57),11.4%,rgb(63,76,119)70.2%)",
+};
+
+const imageStyle = {
+  width: "70%",
+  borderRadius: "50%",
+  height: "70%",
+};
+
+const nameStyle = {
+  textAlign: "center",
+  fontWeight: "bold",
+  padding: "20px",
+};
+
 export default Sidebar;
