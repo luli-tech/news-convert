@@ -20,6 +20,7 @@ Link {
   background: black;
   color: white;
   display: flex;
+  position: sticky;
   height: px;
   align-items: center;
   padding: 20px;
@@ -60,64 +61,6 @@ Link {
   color: lavender;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  justify-content: center;
-  margin-top: 20px;
-}
-.main-container {
-  max-width: fit-content;
-  min-width: 200px;
-  height: 200px;
-  overflow: hidden;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-  display: flex;
-  border-radius: 5px;
-  text-decoration: none;
-  flex-direction: column;
-  gap: 10px;
-}
-.content-image-container {
-  height: 300px;
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.content-image-container img {
-  height: 100%;
-  width: 100%;
-}
-.target-author p {
-  font-size: 15px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  overflow: hidden;
-}
-.img-container {
-  height: 100px;
-  width: 100%;
-}
-.profile-container {
-  height: 25px;
-  border-radius: 25px;
-  width: 25px;
-  overflow: hidden;
-}
-.profile-container img {
-  height: 100%;
-  width: 100%;
-}
-.img-container img {
-  height: 100%;
-  width: 100%;
-}
-.content-name {
-  display: flex;
-  gap: 5px;
-}
 .foot {
   color: white;
   padding: 30px;
@@ -125,6 +68,11 @@ Link {
   margin-top: 20px;
   text-align: center;
   background: black;
+}
+.nav-list * {
+  display: flex;
+  gap: 10px;
+  padding: 0;
 }
 .nav-list {
   display: flex;
@@ -135,13 +83,14 @@ Link {
   color: white;
   display: flex;
   gap: 10px;
+  font-weight: bold;
 }
 .cate-container ul {
   height: 0;
   color: white;
   overflow: hidden;
   display: flex;
-  background: white;
+  /* background: white; */
   flex-direction: column;
 }
 
@@ -268,7 +217,6 @@ Link {
   gap: 15px;
 }
 .active {
-  background: red;
   padding: 0px 10px;
   cursor: pointer;
   border: none;
@@ -433,9 +381,9 @@ Link {
   padding: 10px;
 }
 
-.nav-list {
+/* .nav-list {
   padding: 20px;
-}
+} */
 
 .nav-list a {
   color: white;
@@ -446,6 +394,11 @@ Link {
 
 .categories {
   display: none;
+}
+.categories-title {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
 }
 
 .categories.open {
@@ -838,4 +791,293 @@ body {
   width: 20px;
   height: 20px;
   margin-right: 10px;
+}
+/* Grid container styling */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Main link container styling */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container styling */
+.img-container {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Title styling */
+.title {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 15px;
+}
+
+/* Content author styling */
+.content-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+/* Profile container styling */
+.profile-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Author and published date styling */
+.target-author {
+  display: flex;
+  flex-direction: column;
+}
+
+.target-author p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.target-author p:first-child {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Slider Container */
+.slider-container {
+  position: relative; /* For positioning dots */
+  width: 100%; /* Full width */
+  overflow: hidden; /* Hide overflow */
+}
+
+/* Individual Slider Item */
+.slider-component-child {
+  display: none; /* Hide all items by default */
+  width: 100%; /* Each item takes full width */
+  transition: opacity 0.5s ease-in-out; /* Fade transition */
+}
+
+.slider-component-child.active {
+  display: block; /* Show active slide */
+  opacity: 1; /* Show active slide */
+}
+
+/* Slider Image */
+.slider-image {
+  position: relative; /* Positioning for text overlay */
+  height: 300px; /* Adjust height as needed */
+  overflow: hidden; /* Hide overflow */
+}
+
+.slider-image img {
+  width: 100%; /* Full width of parent */
+  height: 100%; /* Full height of parent */
+  object-fit: cover; /* Maintain aspect ratio and cover */
+  border-radius: 8px; /* Rounded corners */
+}
+
+/* Text Overlay */
+.slider-text-overlay {
+  position: absolute; /* Position absolutely within the slider image */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust to center */
+  color: white; /* White text color */
+  text-align: center; /* Center text */
+  z-index: 2; /* Place above image */
+}
+
+/* Title Styling */
+
+/* Author Styling */
+
+/* Publish Date Styling */
+
+/* Dots Container */
+.dots-container {
+  position: absolute;
+  bottom: 15px; /* Position above the bottom */
+  left: 50%;
+  transform: translateX(-50%); /* Center align */
+  display: flex; /* Flex for dots alignment */
+}
+
+/* Individual Dot */
+.dot {
+  height: 10px; /* Height of the dot */
+  width: 10px; /* Width of the dot */
+  margin: 0 5px; /* Space between dots */
+  background-color: #bbb; /* Default dot color */
+  border-radius: 50%; /* Round shape */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+/* Active Dot */
+.active-dot {
+  background-color: #333; /* Color for active dot */
+}
+/* Dots Container */
+.dots-container {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+/* Dot Styling */
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Active Dot */
+.active-dot {
+  background-color: #333;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .slider-title {
+    font-size: 1.2rem; /* Title font size */
+  }
+
+  .slider-author {
+    font-size: 0.8rem; /* Author font size */
+  }
+
+  .slider-publish {
+    font-size: 0.7rem; /* Publish date font size */
+  }
+}
+/* Text Overlay Styling */
+.slider-text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  overflow: hidden;
+  text-align: center; /* Center-align text inside overlay */
+  width: 80%; /* Adjust as needed to fit text without overflow */
+}
+
+/* Title Styling */
+.slider-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Author and Publish Date Styling */
+.slider-author,
+.slider-publish {
+  font-size: 0.9rem;
+  margin: 2px 0;
+}
+/* Center the FAQ component both vertically and horizontally */
+.out {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f3f4f6;
+}
+
+.faq-container {
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.faq-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* FAQ items styling */
+.faq-list {
+  border-top: 1px solid #ddd;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.faq-arrow {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.faq-answer {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
 }

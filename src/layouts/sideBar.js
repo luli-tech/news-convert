@@ -56,7 +56,14 @@ function Sidebar({ open, toggleSidebar }) {
             <p className="categories-title">
               <FontAwesomeIcon icon={faAngleDown} /> Categories
             </p>
-            <ul className={`categories ${openCategory ? "open" : ""}`}>
+            <ul
+              style={{
+                height: openCategory ? "200px" : "0", // Set height based on openCategory state
+                overflow: "hidden", // Ensure no overflow when collapsed
+                transition: "height 0.3s ease", // Smooth transition
+              }}
+              className={`categories ${openCategory ? "open" : ""}`}
+            >
               <li>
                 <NavLink to="/" style={activeStyle}>
                   Education

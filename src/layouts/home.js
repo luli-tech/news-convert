@@ -13,7 +13,7 @@ function HomePage() {
   const status = useSelector((state) => state.news.status);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 21;
+  const itemsPerPage = 25;
 
   useEffect(() => {
     if (status === "idle") {

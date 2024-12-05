@@ -9,7 +9,7 @@ export const fetchNews = createAsyncThunk(
   async (query) => {
     const api = process.env.REACT_APP_API_KEY;
     const res = await fetch(
-      `https://newsapi.org/v2/everything?q=${query}&apiKey=${api}`
+      `https://newsapi.org/v2/everything?q=bread&apiKey=2da64fa643204522a38df55a18425e21`
     );
     const data = await res.json();
     let finale = await Promise.all(

@@ -36,22 +36,24 @@ const Faq = () => {
   };
 
   return (
-    <div className="faq-container">
-      <h2 className="faq-title">Frequently Asked Questions</h2>
-      <div className="faq-list">
-        {faqs.map((faq, index) => (
-          <div key={index} className="faq-item">
-            <div className="faq-question" onClick={() => toggleAnswer(index)}>
-              <h3>{faq.question}</h3>
-              <span className="faq-arrow">
-                {activeIndex === index ? "−" : "+"}
-              </span>
+    <div className="out">
+      <div className="faq-container">
+        <h2 className="faq-title">Frequently Asked Questions</h2>
+        <div className="faq-list">
+          {faqs.map((faq, index) => (
+            <div key={index} className="faq-item">
+              <div className="faq-question" onClick={() => toggleAnswer(index)}>
+                <h3>{faq.question}</h3>
+                <span className="faq-arrow">
+                  {activeIndex === index ? "−" : "+"}
+                </span>
+              </div>
+              {activeIndex === index && (
+                <p className="faq-answer">{faq.answer}</p>
+              )}
             </div>
-            {activeIndex === index && (
-              <p className="faq-answer">{faq.answer}</p>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

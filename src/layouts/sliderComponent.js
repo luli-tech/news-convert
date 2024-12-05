@@ -1,112 +1,72 @@
-import React from "react";
-import Carousel from "react-bootstrap/Carousel";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const SliderComponent = ({ currentItems }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const totalItems = currentItems.length;
+  const maxVisibleDots = 4; // Set max visible dots to 4
+
+  // Function to go to the next slide
+  const goToNextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalItems);
+  }
+
+  // Use effect to automatically scroll
+  useEffect(() => {
+
+    const interval = setInterval(goToNextSlide, 3000); // Change slide every 3 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [totalItems, goToNextSlide]);
+
+  // Calculate the range of dots to display
+  const startDot = Math.max(0, currentIndex - Math.floor(maxVisibleDots / 2));
+  const endDot = Math.min(totalItems, startDot + maxVisibleDots);
+
+  // Adjust starting dot if nearing the end of the list
+  const visibleDots = currentItems.slice(
+    Math.max(0, endDot - maxVisibleDots),
+    endDot
+  );
+
+  // Function to handle dot click
+  const handleDotClick = (index) => {
+    setCurrentIndex(index);
+  };
+
   return (
-    <Carousel indicators>
-      {currentItems
-        ?.filter((data) => data.image)
-        .map((data, index) => (
-          <Carousel.Item key={index}>
-            <Link to={`/location/${data.id}`}>
-              <div className="carousel-image-wrapper">
-                <img
-                  className="d-block w-100"
-                  src={data.image}
-                  alt={`Slide ${index + 1}`}
-                  style={{
-                    maxHeight: "50vh",
-                    minHeight: "40vh",
-                    objectFit: "cover",
-                  }}
-                />
-                <div className="carousel-gradient-overlay"></div>
-              </div>
-            </Link>
-            <Carousel.Caption>
-              <h5 className="carousel-title">{data.title}</h5>
-              <p className="carousel-description">{data.description}</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+    <div className="slider-container">
+      {currentItems?.map((data, index) => (
+        <Link
+          to={`/location/${data.id}`}
+          key={data.id}
+          className={`slider-component-child ${index === currentIndex ? "active" : ""
+            }`}
+        >
+          <div className="slider-image">
+            <img src={data.image} alt={data.title} />
+            <div className="slider-text-overlay">
+              <p className="slider-title">{data.title}</p>
+              <p className="slider-author">
+                Author: {data.author || "Unknown Author"}
+              </p>
+              <p className="slider-publish">{data.published}</p>
+            </div>
+          </div>
+        </Link>
+      ))}
+
+      {/* Dots Indicators (show up to 4) */}
+      <div className="dots-container">
+        {visibleDots.map((_, index) => (
+          <div
+            key={startDot + index}
+            className={`dot ${startDot + index === currentIndex ? "active-dot" : ""
+              }`}
+            onClick={() => handleDotClick(startDot + index)}
+          ></div>
         ))}
-      <style jsx>{`
-        .carousel-image-wrapper {
-          position: relative;
-        }
-
-        .carousel-gradient-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.5),
-            rgba(255, 255, 255, 0.8)
-          );
-          z-index: 1;
-        }
-
-        .carousel-caption {
-          position: absolute;
-          bottom: 20px;
-          left: 10%;
-          right: 10%;
-          color: #333; /* Dark color for contrast against white */
-          z-index: 2;
-          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7);
-        }
-
-        .carousel-title {
-          font-size: 1.8rem;
-          font-weight: bold;
-        }
-
-        .carousel-description {
-          font-size: 1.1rem;
-        }
-
-        /* Dot indicators styles */
-        .carousel-indicators {
-          position: absolute;
-          bottom: 10px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 3;
-        }
-
-        .carousel-indicators .active {
-          background-color: #333; /* Dark color for active dot */
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-        }
-
-        .carousel-indicators li {
-          background-color: #ccc; /* Light gray for inactive dots */
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-          .carousel-title {
-            font-size: 1.4rem;
-          }
-
-          .carousel-description {
-            font-size: 0.9rem;
-          }
-
-          .carousel-caption {
-            bottom: 10px;
-          }
-        }
-      `}</style>
-    </Carousel>
+      </div>
+    </div>
   );
 };
 

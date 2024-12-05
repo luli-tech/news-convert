@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { fetchNews, setSearch } from "../store";
 import Sidebar from "./sideBar";
 
+
 function Navbar() {
   const dispatch = useDispatch();
   const [sidebarOpen, setSidebarOpen] = useState(false);

@@ -1,4 +1,3 @@
-// ContactForm.js
 import React, { useState } from "react";
 
 const Contact = () => {
@@ -9,7 +8,6 @@ const Contact = () => {
   const [responseMessage, setResponseMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -33,51 +31,53 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-container">
-      <h2 className="contact-title">Contact Us</h2>
+    <div>
+      <div className="contact-container">
+        <h2 className="contact-title">Contact Us</h2>
 
-      {responseMessage && (
-        <p className={`response-message ${isError ? "error" : ""}`}>
-          {responseMessage}
-        </p>
-      )}
+        {responseMessage && (
+          <p className={`response-message ${isError ? "error" : ""}`}>
+            {responseMessage}
+          </p>
+        )}
 
-      <form onSubmit={handleSubmit} className="contact-form">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="contact-input"
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="contact-input"
-        />
-        <input
-          type="text"
-          placeholder="Subject"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          required
-          className="contact-input"
-        />
-        <textarea
-          placeholder="Message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-          className="contact-textarea"
-        ></textarea>
-        <button type="submit" className="contact-button">
-          Send Message
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="contact-form">
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="contact-input"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="contact-input"
+          />
+          <input
+            type="text"
+            placeholder="Subject"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            required
+            className="contact-input"
+          />
+          <textarea
+            placeholder="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+            className="contact-textarea"
+          ></textarea>
+          <button type="submit" className="contact-button">
+            Send Message
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
